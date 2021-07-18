@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using EmployeeManagementApi.Models;
 using EmployeeManagementApi.Services;
+using Microsoft.Extensions.Options;
 
 namespace EmployeeManagementApi
 {

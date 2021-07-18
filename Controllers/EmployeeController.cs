@@ -11,64 +11,64 @@ namespace EmployeeManagementApi.Controllers
     {
         private readonly EmployeeService _employeeService;
 
-        public BooksController(BookService bookService)
+        public EmployeeController(EmployeeService employeeService)
         {
-            _bookService = bookService;
+            _employeeService = employeeService;
         }
 
         [HttpGet]
-        public ActionResult<List<Book>> Get() =>
-            _bookService.Get();
+        public ActionResult<List<Employee>> Get() =>
+            _employeeService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetBook")]
-        public ActionResult<Book> Get(string id)
+        [HttpGet("{id:length(24)}", Name = "GetEmployee")]
+        public ActionResult<Employee> Get(string id)
         {
-            var book = _bookService.Get(id);
+            var employee = _employeeService.Get(id);
 
-            if (book == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return book;
+            return employee;
         }
 
         [HttpPost]
-        public ActionResult<Book> Create(Book book)
+        public ActionResult<Employee> Create(Employee employee)
         {
-            _bookService.Create(book);
+            _employeeService.Create(employee);
 
-            return CreatedAtRoute("GetBook", new { id = book.Id.ToString() }, book);
+            return CreatedAtRoute("GetEmployee", new { id = employee.Id.ToString() }, employee);
         }
 
         [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, Book bookIn)
+        public IActionResult Update(string id, Employee employeeIn)
         {
-            var book = _bookService.Get(id);
+            var employee = _employeeService.Get(id);
 
-            if (book == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            _bookService.Update(id, bookIn);
+            _employeeService.Update(id, employeeIn);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {
-            var book = _bookService.Get(id);
+            var employee = _employeeService.Get(id);
 
-            if (book == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            _bookService.Remove(book.Id);
+            _employeeService.Remove(employee.Id);
 
-            return NoContent();
+            return Ok();
         }
     }
 }
